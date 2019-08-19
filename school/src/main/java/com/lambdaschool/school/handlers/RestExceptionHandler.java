@@ -25,6 +25,20 @@ import java.util.Date;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler
 {
 
+    @ExceptionHandler({ResourceNotFoundException.class})
+    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException rnfe, HttpServletRequest request)
+    {
+        ErrorDetail errorDetail = new ErrorDetail();
+
+        errorDetail.setTimestamp(new Date().getTime());
+        errorDetail.setStatus(HttpStatus.NOT_FOUND.value());
+        errorDetail.setTitle("Resource Not Found");
+        errorDetail.setDetail(rnfe.getMessage());
+        errorDetail.setDeveloperMessage(rnfe.getClass().getName());
+
+        return new ResponseEntity<>(errorDetail, null, HttpStatus.NOT_FOUND);
+    }
+
     @Override
     protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request)
     {
