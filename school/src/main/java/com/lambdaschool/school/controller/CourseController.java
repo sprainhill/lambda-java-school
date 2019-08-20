@@ -5,6 +5,7 @@ import com.lambdaschool.school.model.ErrorDetail;
 import com.lambdaschool.school.service.CourseService;
 import com.lambdaschool.school.view.CountStudentsInCourses;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
@@ -65,7 +66,7 @@ public class CourseController
     })
 
     @DeleteMapping("/courses/{courseid}")
-    public ResponseEntity<?> deleteCourseById(@PathVariable long courseid, HttpServletRequest request)
+    public ResponseEntity<?> deleteCourseById(@ApiParam(value = "courseid", required = true, example = "1") @PathVariable long courseid, HttpServletRequest request)
     {
         // logger will go here logging when accessed
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
