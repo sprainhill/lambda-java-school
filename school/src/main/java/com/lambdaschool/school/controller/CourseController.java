@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class CourseController
 {
     // create logger
-    private static final Logger logger = LoggerFactory.getLogger(CourseController.class)
+    private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
 
 
     @Autowired
@@ -28,7 +28,7 @@ public class CourseController
     public ResponseEntity<?> listAllCourses(HttpServletRequest request)
     {
         // logger will go here logging when accessed
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         ArrayList<Course> myCourses = courseService.findAll();
         return new ResponseEntity<>(myCourses, HttpStatus.OK);
@@ -38,7 +38,7 @@ public class CourseController
     public ResponseEntity<?> getCountStudentsInCourses(HttpServletRequest request)
     {
         // logger will go here logging when accessed
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         return new ResponseEntity<>(courseService.getCountStudentsInCourse(), HttpStatus.OK);
     }
@@ -47,7 +47,7 @@ public class CourseController
     public ResponseEntity<?> deleteCourseById(@PathVariable long courseid, HttpServletRequest request)
     {
         // logger will go here logging when accessed
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         courseService.delete(courseid);
         return new ResponseEntity<>(HttpStatus.OK);

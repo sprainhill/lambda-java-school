@@ -31,7 +31,7 @@ public class StudentController
     @GetMapping(value = "/students", produces = {"application/json"})
     public ResponseEntity<?> listAllStudents(HttpServletRequest request)
     {
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         List<Student> myStudents = studentService.findAll();
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
@@ -43,7 +43,7 @@ public class StudentController
             @PathVariable
                     Long StudentId, HttpServletRequest request)
     {
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         Student r = studentService.findStudentById(StudentId);
         return new ResponseEntity<>(r, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class StudentController
     public ResponseEntity<?> getStudentByNameContaining(
             @PathVariable String name, HttpServletRequest request)
     {
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         List<Student> myStudents = studentService.findStudentByNameLike(name);
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
@@ -69,7 +69,7 @@ public class StudentController
                                            @RequestBody
                                                    Student newStudent, HttpServletRequest request) throws URISyntaxException
     {
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         newStudent = studentService.save(newStudent);
 
@@ -89,7 +89,7 @@ public class StudentController
             @PathVariable
                     long Studentid, HttpServletRequest request)
     {
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         studentService.update(updateStudent, Studentid);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -101,7 +101,7 @@ public class StudentController
             @PathVariable
                     long Studentid, HttpServletRequest request)
     {
-        logger.trace(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
         studentService.delete(Studentid);
         return new ResponseEntity<>(HttpStatus.OK);
