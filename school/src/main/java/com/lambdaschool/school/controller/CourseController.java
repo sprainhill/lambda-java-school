@@ -1,9 +1,12 @@
 package com.lambdaschool.school.controller;
 
 import com.lambdaschool.school.model.Course;
+import com.lambdaschool.school.model.ErrorDetail;
 import com.lambdaschool.school.service.CourseService;
 import com.lambdaschool.school.view.CountStudentsInCourses;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,10 @@ public class CourseController
     }
 
     @ApiOperation(value = "Get count of all students enrolled in a single course", responseContainer = "List")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Count determined", responseContainer = "List", response = CountStudentsInCourses.class),
+            @ApiResponse(code = 404, message = "Could not find count", response = ErrorDetail.class )
+    })
     @GetMapping(value = "/studcount", produces = {"application/json"})
     public ResponseEntity<?> getCountStudentsInCourses(HttpServletRequest request)
     {
@@ -50,6 +57,13 @@ public class CourseController
 
     // no response so response is void
     @ApiOperation(value = "Deletes a course by courseid", response = void.class)
+    // add custom error handling
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Course deleted successfully", response = void.class),
+            @ApiResponse(code = 404, message = "Course Not Found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error deleting course", response = ErrorDetail.class)
+    })
+
     @DeleteMapping("/courses/{courseid}")
     public ResponseEntity<?> deleteCourseById(@PathVariable long courseid, HttpServletRequest request)
     {

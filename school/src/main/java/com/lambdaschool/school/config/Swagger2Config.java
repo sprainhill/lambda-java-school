@@ -13,6 +13,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 // http://localhost:2019/swagger-ui.html
+// http://editor.swagger.io/
+// generate bash client
+// generates markdown files for models and controllers
+
+//For pdf generate an html client
 @Configuration
 @EnableSwagger2
 public class Swagger2Config
