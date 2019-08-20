@@ -1,12 +1,15 @@
 package com.lambdaschool.school.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+// Add annotation for Swagger to deal with the JPA Entity
+@ApiModel(value = "Student", description = "The Student Entity")
 @Entity
 @Table(name = "student")
 public class Student
