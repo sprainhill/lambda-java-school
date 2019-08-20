@@ -3,6 +3,7 @@ package com.lambdaschool.school.controller;
 import com.lambdaschool.school.model.Course;
 import com.lambdaschool.school.service.CourseService;
 import com.lambdaschool.school.view.CountStudentsInCourses;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class CourseController
     @Autowired
     private CourseService courseService;
 
+    // Swagger annotation, giving this endpoint documentation saying that it will
+    // get all courses available, and the response will be a container of type List
+    @ApiOperation(value ="Get all courses available", responseContainer = "List")
     @GetMapping(value = "/courses", produces = {"application/json"})
     public ResponseEntity<?> listAllCourses(HttpServletRequest request)
     {
@@ -34,6 +38,7 @@ public class CourseController
         return new ResponseEntity<>(myCourses, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Get count of all students enrolled in a single course", responseContainer = "List")
     @GetMapping(value = "/studcount", produces = {"application/json"})
     public ResponseEntity<?> getCountStudentsInCourses(HttpServletRequest request)
     {
@@ -43,6 +48,8 @@ public class CourseController
         return new ResponseEntity<>(courseService.getCountStudentsInCourse(), HttpStatus.OK);
     }
 
+    // no response so response is void
+    @ApiOperation(value = "Deletes a course by courseid", response = void.class)
     @DeleteMapping("/courses/{courseid}")
     public ResponseEntity<?> deleteCourseById(@PathVariable long courseid, HttpServletRequest request)
     {
