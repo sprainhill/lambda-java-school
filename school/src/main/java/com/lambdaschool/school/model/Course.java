@@ -1,6 +1,7 @@
 package com.lambdaschool.school.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,10 +11,13 @@ import java.util.List;
 @Table(name = "course")
 public class Course
 {
+    // document as primary key for Swagger
+    @ApiModelProperty(name = "courseid", value = "Course table primary key", required = true, example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long courseid;
 
+    @ApiModelProperty(name = "coursename", value = "Name", example = "Underwater Basket Weaving")
     private String coursename;
 
     @ManyToOne
