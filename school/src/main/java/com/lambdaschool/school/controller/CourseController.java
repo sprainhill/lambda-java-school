@@ -4,13 +4,12 @@ import com.lambdaschool.school.model.Course;
 import com.lambdaschool.school.model.ErrorDetail;
 import com.lambdaschool.school.service.CourseService;
 import com.lambdaschool.school.view.CountStudentsInCourses;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +27,28 @@ public class CourseController
 
     @Autowired
     private CourseService courseService;
+    // Swagger annotation, giving this endpoint documentation saying that it will
+    // get all courses available with pagination, and the response will be a container of type List
+    @ApiOperation(value ="Get all courses available with pagination", responseContainer = "List")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+                    value = "Results page you want to retrieve (0..N)"),
+            @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+                    value = "Number of records per page."),
+            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+                    value = "Sorting criteria in the format: property(,asc|desc). " +
+                            "Default sort order is ascending. " +
+                            "Multiple sort criteria are supported.")})
+    @GetMapping(value = "/allcourses", produces = {"application/json"})
+    public ResponseEntity<?> listAllCoursesPaging(@PageableDefault(page = 0, size = 3) Pageable pageable, HttpServletRequest request)
+    {
+        // logger will go here logging when accessed
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
+
+        ArrayList<Course> myCourses = courseService.findAll(pageable);
+        return new ResponseEntity<>(myCourses, HttpStatus.OK);
+    }
+
 
     // Swagger annotation, giving this endpoint documentation saying that it will
     // get all courses available, and the response will be a container of type List

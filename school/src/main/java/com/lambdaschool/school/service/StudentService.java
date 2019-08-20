@@ -9,6 +9,8 @@ public interface StudentService
 {
     List<Student> findAll(Pageable pageable);
 
+    List<Student> findAll();
+
     Student findStudentById(long id);
 
     List<Student> findStudentByNameLike(String name);
