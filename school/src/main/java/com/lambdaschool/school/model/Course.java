@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "course")
-public class Course
+public class Course extends Auditable
 {
     // document as primary key for Swagger
     @ApiModelProperty(name = "courseid", value = "Course table primary key", required = true, example = "1")
