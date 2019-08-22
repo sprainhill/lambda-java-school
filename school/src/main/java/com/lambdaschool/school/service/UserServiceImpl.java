@@ -78,12 +78,6 @@ public class UserServiceImpl implements UserDetailsService, UserService
             newRoles.add(new UserRoles(newUser, ur.getRole()));
         }
         newUser.setUserRoles(newRoles);
-
-        for (Quote q : user.getQuotes())
-        {
-            newUser.getQuotes().add( new Quote(q.getQuote(), newUser));
-        }
-
         return userrepos.save(newUser);
     }
 
