@@ -34,6 +34,18 @@ public class CourseServiceImpl implements CourseService
     }
 
     @Override
+    public Course findCourseById(long id)
+    {
+        return null;
+    }
+
+    @Override
+    public Course save(Course course)
+    {
+        return null;
+    }
+
+    @Override
     public ArrayList<CountStudentsInCourses> getCountStudentsInCourse()
     {
 

@@ -1,7 +1,10 @@
 package com.lambdaschool.school.service;
 
 import com.lambdaschool.school.exceptions.ResourceNotFoundException;
+import com.lambdaschool.school.model.User;
 import com.lambdaschool.school.model.UserRoles;
+import com.lambdaschool.school.repository.RoleRepository;
+import com.lambdaschool.school.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService
